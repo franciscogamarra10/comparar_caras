@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Comparar similitudes entre caras</title>
+    <style>
+        body {
+            font-family: Arial;
+            text-align: center;
+            margin: 50px;
+        }
+        img {
+            max-height: 200px;
+            margin: 10px;
+        }
+        .upload-box {
+            margin-bottom: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Comparar 2 caras</h1>
+
+    <form method="POST" enctype="multipart/form-data">
+        <div class="upload-box">
+            <label>Select first image:</label><br>
+            <input type="file" name="file1" required>
+        </div>
+        <div class="upload-box">
+            <label>Select second image:</label><br>
+            <input type="file" name="file2" required>
+        </div>
+        <button type="submit">Compare Faces</button>
+    </form>
+
+    {% if result %}
+        <h2>Resultado: {{ result }}</h2>
+        <p>Distance: {{ "%.4f" | format(distance) }}</p>
+
+        {% if file1_url and file2_url %}
+            <div>
+                <img src="{{ file1_url }}" alt="Image 1">
+                <img src="{{ file2_url }}" alt="Image 2">
+            </div>
+        {% endif %}
+    {% endif %}
+
+<h2>Submit Feedback</h2>
+<form action="/feedback" method="POST">
+  <textarea name="feedback" rows="4" cols="50" placeholder="Leave your feedback here..."></textarea><br><br>
+  <button type="submit">Submit Feedback</button>
+</form>
+
+</body>
+</html>
+
