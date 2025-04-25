@@ -1,0 +1,15 @@
+services:
+  - type: web
+    name: face-match-app
+    env: python
+    plan: free
+    buildCommand: |
+      pyenv install 3.8.18
+      pyenv global 3.8.18
+      pip install --upgrade pip
+      pip install -r requirements.txt
+    startCommand: gunicorn app:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+
